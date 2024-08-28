@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Responsive Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .header {
+            background-color: #1F2937;
+            color: #fff;
+            padding: 1em 0;
+            position: fixed; 
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; 
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        .nav {
+            position: relative;
+        }
+
+        .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .nav ul li a:hover,
+        .nav ul li a:focus {
+            color: #38BDF8;
+        }
+
+        .nav ul li a i {
+            margin-right: 5px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #1F2937;
+            color: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4B5563;
+        }
+
+        .nav ul li:hover .dropdown-content,
+        .nav ul li:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .hero {
+            background: url('hero.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .hero h2 {
+            color: #1F2937;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .hero p {
+            color: #1F2937;
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+
+        .hero button {
+            padding: 0.5em 1em;
+            background-color: #38BDF8;
+            border: none;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .hero button:hover,
+        .hero button:focus {
+            background-color: #0284C7; 
+            outline: none;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .about, .services, .contact {
+            background-color: #f9f9f9;
+        }
+
+        .about .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about .content, .about .image {
+            flex: 1 1 45%;
+            margin: 20px;
+        }
+
+        .about .image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .about h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .about p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .services {
+            background-color: #f9f9f9;
+            padding: 60px 0;
+        }
+
+        .services .container {
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2.5em;
+            margin-bottom: 1em;
+        }
+
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .service-box {
+            flex: 1 1 calc(20% - 20px);
+            background-color: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-box:hover,
+        .service-box:focus {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3em;
+            color: #38BDF8;
+            margin-bottom: 1em;
+        }
+
+        .service-box h3 {
+            font-size: 1.5em;
+            margin: 0.5em 0;
+        }
+
+        .service-box p {
+            font-size: 1.5em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact label {
+            margin: 0.5em 0 0.2em;
+        }
+
+        .contact input, .contact textarea {
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .contact button {
+            padding: 0.5em 1em;
+            background-color: #1F2937;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+        }
+
+        .contact button:hover,
+        .contact button:focus {
+            background-color: #4B5563;
+            outline: none; 
+        }
+
+        .footer {
+            background-color: #1F2937;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .footer .social-links {
+            margin-top: 1em;
+        }
+
+        .footer .social-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .footer .social-links a:hover {
+            color: #38BDF8;
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                height: 40px; 
+            }
+
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                padding: 50px 0;
+                height: auto;
+            }
+
+            .about .content, .about .image {
+                flex: 1 1 100%;
+            }
+
+            .services-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-box {
+                flex: 1 1 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <header class="header">
+        <div class="container">
+            <a href="#home" class="logo">
+                <img src="prdg.png" alt="Logo" class="logo">
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <!-- Add more dropdown items as needed -->
+                    <li>
+                        <a href="#"><i class="fas fa-user"></i> More</a>
+                        <div class="dropdown-content">
+                            <a href="#about">About Us</a>
+                            <a href="#team">Team</a>
+                            <a href="#careers">Careers</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Welcome to Our Website</h2>
+            <p>Your journey to success starts here</p>
+            <button onclick="scrollToSection('about')">Learn More</button>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="content">
+                <h2>About Us</h2>
+        <P>
+            Our company is dedicated to providing students with valuable work experience, allowing them to gain practical skills and knowledge that can help them in their future careers.
+            Our internships are designed to simulate real-world work experiences, giving students the opportunity to work on projects and assignments that are relevant to their chosen field of study. 
+        </P>
+            </div>
+            <div class="image">
+                <img src="prdg.png" alt="About Us Image">
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-box">
+                    <i class="fas fa-cogs service-icon"></i>
+                    <h3>Service</h3>
+                    <p>Description...</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-chart-line service-icon"></i>
+                    <h3>Service</h3>
+                    <p>Description...</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-briefcase service-icon"></i>
+                    <h3>Service</h3>
+                    <p>Description...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 My Landing Page. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:example@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Form submitted!');
+        });
+    </script>
+</body>
+</html>
